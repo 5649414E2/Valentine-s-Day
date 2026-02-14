@@ -338,23 +338,13 @@
   </div>
 
   <script src="script.js"></script>
-<audio id="bgMusic" loop>
-  <source src="music.mp3" type="audio/mpeg">
-</audio>
-
+<!-- 🎵 Background Music — paste just before </body> -->
+<audio id="bg-music" src="music.mp3" loop preload="auto"></audio>
 <script>
-  // Wait for user interaction, then play music
-  function startMusic() {
-    const music = document.getElementById("bgMusic");
-    music.play().catch(() => {
-      console.log("User interaction required to play music.");
-    });
-    // Remove this listener after first interaction
-    window.removeEventListener('click', startMusic);
-  }
-
-  // Play on first click anywhere
-  window.addEventListener('click', startMusic);
+  document.addEventListener('click', function play() {
+    document.getElementById('bg-music').play();
+    document.removeEventListener('click', play);
+  }, { once: true });
 </script>
 </body>
 </html>
