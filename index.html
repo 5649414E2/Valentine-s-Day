@@ -338,22 +338,23 @@
   </div>
 
   <script src="script.js"></script>
-  <button class="music-btn" id="musicBtn">🎵 Play Music</button>
-
-<audio id="bgMusic" loop preload="auto">
+<audio id="bgMusic" loop>
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-const musicBtn = document.getElementById("musicBtn");
-const bgMusic = document.getElementById("bgMusic");
+  // Wait for user interaction, then play music
+  function startMusic() {
+    const music = document.getElementById("bgMusic");
+    music.play().catch(() => {
+      console.log("User interaction required to play music.");
+    });
+    // Remove this listener after first interaction
+    window.removeEventListener('click', startMusic);
+  }
 
-musicBtn.addEventListener("click", () => {
-  bgMusic.play().catch(err => {
-    console.log("Playback failed:", err);
-    alert("Music failed to play. Check the file path!");
-  });
-});
+  // Play on first click anywhere
+  window.addEventListener('click', startMusic);
 </script>
 </body>
 </html>
