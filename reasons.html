@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ============================================================
+       REASONS PAGE — reasons.html
+       ✏️ Edit the reason cards below — find "REASON CARDS" section
+       ============================================================ -->
+
+  <title>Reasons I Like You 💖</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+
+    .reasons-page {
+      min-height: 100vh;
+      padding: 2rem 1.5rem 5rem;
+      max-width: 860px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ── Page Header ─────────────────────────────────────────── */
+    .page-header {
+      text-align: center;
+      padding: 2.5rem 0 2rem;
+    }
+
+    .page-badge {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      color: var(--pink-deep);
+      background: var(--pink-pale);
+      border: 2.5px solid var(--pink-light);
+      padding: 0.35rem 1.1rem;
+      border-radius: var(--radius-pill);
+      margin-bottom: 1.2rem;
+      animation: popIn 0.7s cubic-bezier(0.34,1.56,0.64,1) 0.1s both;
+    }
+
+    .page-title-main {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 7vw, 4rem);
+      color: var(--pink);
+      -webkit-text-stroke: 2px var(--pink-deep);
+      text-shadow: 4px 4px 0 var(--pink-deep);
+      display: block;
+      animation: popIn 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.2s both;
+    }
+
+    .page-title-sub {
+      font-family: var(--font-script);
+      font-size: clamp(1.2rem, 3.5vw, 1.8rem);
+      color: var(--text-mid);
+      display: block;
+      margin-top: 0.3rem;
+      animation: popIn 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.35s both;
+    }
+
+    .header-emojis {
+      font-size: 2rem;
+      margin: 1rem 0;
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      animation: popIn 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.5s both;
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0) rotate(-8deg); opacity: 0; }
+      to   { transform: scale(1) rotate(0deg);  opacity: 1; }
+    }
+
+    /* ── Reasons Grid ────────────────────────────────────────── */
+    .reasons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.2rem;
+      margin-top: 1rem;
+    }
+
+    /* ── Reason Card ─────────────────────────────────────────── */
+    .reason-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 1.8rem 1.5rem;
+      border: 3px solid var(--pink-light);
+      box-shadow: 0 5px 0 var(--pink-light), var(--shadow-card);
+      position: relative;
+      transition: var(--trans);
+      cursor: default;
+      overflow: hidden;
+    }
+
+    /* Rainbow top stripe */
+    .reason-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 5px;
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    }
+
+    /* Color variants */
+    .reason-card:nth-child(3n+1) {
+      border-color: var(--pink-light);
+      box-shadow: 0 5px 0 var(--pink-light), var(--shadow-card);
+    }
+    .reason-card:nth-child(3n+1)::before { background: linear-gradient(to right, var(--pink), var(--pink-light)); }
+
+    .reason-card:nth-child(3n+2) {
+      border-color: var(--purple-light);
+      box-shadow: 0 5px 0 var(--purple-light), var(--shadow-card);
+    }
+    .reason-card:nth-child(3n+2)::before { background: linear-gradient(to right, var(--purple), var(--blue)); }
+
+    .reason-card:nth-child(3n+3) {
+      border-color: var(--blue-light);
+      box-shadow: 0 5px 0 var(--blue-light), var(--shadow-card);
+    }
+    .reason-card:nth-child(3n+3)::before { background: linear-gradient(to right, var(--blue), var(--mint)); }
+
+    .reason-card:hover {
+      transform: translateY(-6px) scale(1.02);
+    }
+
+    .reason-card:nth-child(3n+1):hover { box-shadow: 0 10px 0 var(--pink-light), 0 16px 40px rgba(255,110,180,0.2); }
+    .reason-card:nth-child(3n+2):hover { box-shadow: 0 10px 0 var(--purple-light), 0 16px 40px rgba(181,123,238,0.2); }
+    .reason-card:nth-child(3n+3):hover { box-shadow: 0 10px 0 var(--blue-light), 0 16px 40px rgba(110,198,255,0.2); }
+
+    /* Number badge */
+    .reason-number {
+      position: absolute;
+      top: 14px; right: 16px;
+      font-family: var(--font-display);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      background: var(--bg-main);
+      border-radius: var(--radius-pill);
+      padding: 0.15rem 0.55rem;
+      border: 2px solid var(--pink-light);
+    }
+
+    .reason-card:nth-child(3n+2) .reason-number { border-color: var(--purple-light); }
+    .reason-card:nth-child(3n+3) .reason-number { border-color: var(--blue-light); }
+
+    /* Emoji */
+    .reason-emoji {
+      font-size: 2.2rem;
+      display: block;
+      margin-bottom: 0.7rem;
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    }
+
+    .reason-card:hover .reason-emoji { transform: scale(1.25) rotate(10deg); }
+
+    /* Title */
+    .reason-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      color: var(--text-dark);
+      margin-bottom: 0.35rem;
+    }
+
+    /* Text */
+    .reason-text {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      font-weight: 600;
+      line-height: 1.6;
+    }
+
+    /* ── Bottom CTA ──────────────────────────────────────────── */
+    .reasons-cta {
+      text-align: center;
+      padding: 3rem 0 1rem;
+    }
+
+    .reasons-cta p {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      color: var(--text-dark);
+      margin-bottom: 1.5rem;
+    }
+
+    .reasons-cta p span { color: var(--pink); }
+  </style>
+</head>
+<body>
+
+  <canvas id="sparkle-canvas"></canvas>
+  <div class="hearts-container"></div>
+  <div class="page-transition active"></div>
+
+  <nav class="roblox-nav">
+    <ul class="nav-links">
+      <li><a href="index.html">🏠 Home</a></li>
+      <li><span class="nav-divider">·</span></li>
+      <li><a href="reasons.html">💌 Reasons</a></li>
+      <li><span class="nav-divider">·</span></li>
+      <li><a href="surprise.html">🎁 Surprise</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-wrapper">
+    <div class="reasons-page">
+
+      <!-- Header -->
+      <div class="page-header">
+        <span class="page-badge">💌 For You</span>
+        <!-- ✏️ EDIT: Title -->
+        <span class="page-title-main">Reasons I Like You</span>
+        <!-- ✏️ EDIT: Script subtitle -->
+        <span class="page-title-sub">a very important list ✨</span>
+        <div class="header-emojis">
+          <span class="wobble">💖</span>
+          <span class="bounce">⭐</span>
+          <span class="wobble">🌸</span>
+          <span class="bounce">💜</span>
+          <span class="wobble">✨</span>
+        </div>
+      </div>
+
+      <!-- ======================================================
+           REASON CARDS — ✏️ EDIT THESE!
+           Each card has:
+           - reason-emoji: the emoji shown on the card
+           - reason-title: bold title line
+           - reason-text: the detail below it
+           Add more cards by copying a reason-card div block.
+           ====================================================== -->
+      <div class="reasons-grid">
+
+        <div class="reason-card fade-in">
+          <span class="reason-number">01</span>
+          <!-- ✏️ EDIT -->
+          <span class="reason-emoji">😂</span>
+          <p class="reason-title">Your Sense of Humour</p>
+          <p class="reason-text">You make everything funnier just by being there. Genuinely one of the funniest people I know.</p>
+        </div>
+
+        <div class="reason-card fade-in fade-in-delay-1">
+          <span class="reason-number">02</span>
+          <!-- ✏️ EDIT -->
+          <span class="reason-emoji">💪</span>
+          <p class="reason-title">You're So Strong</p>
+          <p class="reason-text">You handle stuff that would break most people. I honestly find that really admirable.</p>
+        </div>
+
+        <div class="reason-card fade-in fade-in-delay-2">
+          <span class="reason-number">03</span>
+          <!-- ✏️ EDIT -->
+          <span class="reason-emoji">🌟</span>
+          <p class="reason-title">You Actually Care</p>
+          <p class="reason-text">You notice when people are having a hard day. That's rarer than you think.</p>
+        </div>
+
+        <div class="reason-card fade-in fade-in-delay-1">
+          <span class="reason-number">04</span>
+          <!-- ✏️ EDIT -->
+          <span class="reason-emoji">✨</span>
+          <p class="reason-title">Your Energy</p>
+          <p class="reason-text">When you're in a good mood, the whole room feels it. You're genuinely fun to be around.</p>
+        </div>
+
+        <div class="reason-card fade-in fade-in-delay-2">
+          <span class="reason-number">05</span>
+          <!-- ✏️ EDIT -->
+          <span class="reason-emoji">🎨</span>
+          <p class="reason-title">Your Taste</p>
+          <p class="reason-text">Your opinions on things are always interesting. You have genuinely good taste.</p>
+        </div>
+
+        <div class="reason-card fade-in fade-in-delay-3">
+          <span class="reason-number">06</span>
+          <!-- ✏️ EDIT -->
+          <span class="reason-emoji">💬</span>
+          <p class="reason-title">Easy To Talk To</p>
+          <p class="reason-text">Conversations with you never feel forced. It just flows, every single time.</p>
+        </div>
+
+        <div class="reason-card fade-in fade-in-delay-2">
+          <span class="reason-number">07</span>
+          <!-- ✏️ EDIT -->
+          <span class="reason-emoji">🌸</span>
+          <p class="reason-title">Your Kindness</p>
+          <p class="reason-text">You're kind in a genuine way, not a performative way. That actually means something.</p>
+        </div>
+
+        <div class="reason-card fade-in fade-in-delay-3">
+          <span class="reason-number">08</span>
+          <!-- ✏️ EDIT -->
+          <span class="reason-emoji">🔥</span>
+          <p class="reason-title">Your Passion</p>
+          <p class="reason-text">When you care about something, you go all in. It's honestly contagious.</p>
+        </div>
+
+        <div class="reason-card fade-in fade-in-delay-4">
+          <span class="reason-number">09</span>
+          <!-- ✏️ EDIT -->
+          <span class="reason-emoji">💖</span>
+          <p class="reason-title">Just… You</p>
+          <p class="reason-text">There's no one else quite like you. And that's a genuinely good thing. Happy Valentine's Day!</p>
+        </div>
+
+      </div>
+      <!-- END OF REASON CARDS -->
+
+      <!-- CTA -->
+      <div class="reasons-cta fade-in">
+        <p>There's still <span>one more thing</span> waiting... 👀</p>
+        <a href="surprise.html" class="btn-roblox btn-purple btn-pulse">
+          See the Surprise 🎁
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

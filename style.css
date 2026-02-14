@@ -1,0 +1,348 @@
+/* ============================================================
+   FRIEND VALENTINE'S WEBSITE — SHARED STYLESHEET
+   ============================================================
+   Aesthetic: Roblox-inspired Pastel / Bubbly / Playful
+   Palette: Hot pink, lilac, sky blue, mint, butter yellow
+   Fonts: Fredoka One + Nunito + Pacifico
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Pacifico&display=swap');
+
+/* ── Tokens ──────────────────────────────────────────────── */
+:root {
+  /* Core Pastels */
+  --pink:         #ff6eb4;
+  --pink-light:   #ffb3d9;
+  --pink-pale:    #ffe4f3;
+  --pink-deep:    #e0478a;
+
+  --purple:       #b57bee;
+  --purple-light: #d9b8ff;
+  --purple-pale:  #f0e5ff;
+  --purple-deep:  #8a44d4;
+
+  --blue:         #6ec6ff;
+  --blue-light:   #b8e4ff;
+  --blue-pale:    #e5f6ff;
+
+  --mint:         #72e8c2;
+  --yellow:       #ffe566;
+  --peach:        #ffb899;
+
+  /* Backgrounds */
+  --bg-main:      #fff0f8;
+  --bg-card:      #ffffff;
+  --bg-purple:    #f8f0ff;
+
+  /* Text */
+  --text-dark:    #3a1a4a;
+  --text-mid:     #7a4a8a;
+  --text-muted:   #b090c0;
+  --text-white:   #ffffff;
+
+  /* Chunky Roblox-style shadows */
+  --shadow-pink:   4px 4px 0px #e0478a;
+  --shadow-purple: 4px 4px 0px #8a44d4;
+  --shadow-blue:   4px 4px 0px #3a9fd4;
+  --shadow-card:   0 8px 32px rgba(181,123,238,0.18), 0 2px 8px rgba(255,110,180,0.12);
+
+  /* Glow */
+  --glow-pink:    0 0 20px rgba(255,110,180,0.5), 0 0 50px rgba(255,110,180,0.25);
+  --glow-purple:  0 0 20px rgba(181,123,238,0.5), 0 0 50px rgba(181,123,238,0.25);
+  --glow-blue:    0 0 20px rgba(110,198,255,0.5);
+
+  /* Typography */
+  --font-display: 'Fredoka One', cursive;
+  --font-script:  'Pacifico', cursive;
+  --font-body:    'Nunito', sans-serif;
+
+  /* Border radius — chunky and round like Roblox UI */
+  --radius-sm:    12px;
+  --radius-md:    20px;
+  --radius-lg:    32px;
+  --radius-xl:    48px;
+  --radius-pill:  999px;
+
+  --nav-height:   68px;
+  --trans:        all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ── Reset ───────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  background: var(--bg-main);
+  color: var(--text-dark);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  min-height: 100vh;
+  overflow-x: hidden;
+  /* Subtle dot grid — very Roblox game UI */
+  background-image: radial-gradient(circle, rgba(181,123,238,0.12) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* ── Scrollbar ───────────────────────────────────────────── */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--pink-pale); border-radius: 4px; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, var(--pink), var(--purple));
+  border-radius: 4px;
+}
+
+/* ── Sparkle Canvas ──────────────────────────────────────── */
+#sparkle-canvas {
+  position: fixed; inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ── Floating Hearts ─────────────────────────────────────── */
+.hearts-container {
+  position: fixed; bottom: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.heart {
+  position: absolute;
+  bottom: -60px;
+  opacity: 0;
+  animation: floatUp linear infinite;
+  user-select: none;
+  font-style: normal;
+}
+
+@keyframes floatUp {
+  0%   { transform: translateY(0) scale(0.7) rotate(-10deg); opacity: 0; }
+  10%  { opacity: 1; }
+  85%  { opacity: 0.8; }
+  100% { transform: translateY(-110vh) scale(1.1) rotate(10deg); opacity: 0; }
+}
+
+/* ── Navigation ──────────────────────────────────────────── */
+.roblox-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1.5rem;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  border-bottom: 3px solid var(--pink-light);
+  box-shadow: 0 4px 20px rgba(255,110,180,0.15);
+}
+
+.nav-links {
+  display: flex;
+  gap: 0.6rem;
+  list-style: none;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.nav-links a {
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  letter-spacing: 0.03em;
+  color: var(--text-mid);
+  text-decoration: none;
+  padding: 0.35rem 1rem;
+  border-radius: var(--radius-pill);
+  border: 2px solid transparent;
+  transition: var(--trans);
+  background: transparent;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  background: var(--pink-pale);
+  border-color: var(--pink-light);
+  color: var(--pink-deep);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255,110,180,0.2);
+}
+
+.nav-divider {
+  color: var(--purple-light);
+  font-size: 1.1rem;
+}
+
+/* ── Page Wrapper ────────────────────────────────────────── */
+.page-wrapper {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  padding-top: var(--nav-height);
+}
+
+/* ── Roblox-style Button ─────────────────────────────────── */
+.btn-roblox {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  color: var(--text-white);
+  text-decoration: none;
+  padding: 0.9rem 2.5rem;
+  border-radius: var(--radius-pill);
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition: var(--trans);
+  background: linear-gradient(135deg, var(--pink) 0%, var(--purple) 100%);
+  box-shadow: var(--shadow-pink), 0 6px 20px rgba(255,110,180,0.35);
+  outline: 3px solid rgba(255,255,255,0.6);
+  outline-offset: 2px;
+}
+
+.btn-roblox:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 6px 0px var(--pink-deep), 0 10px 30px rgba(255,110,180,0.4);
+}
+
+.btn-roblox:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0px var(--pink-deep);
+}
+
+/* Purple variant */
+.btn-purple {
+  background: linear-gradient(135deg, var(--purple) 0%, var(--blue) 100%);
+  box-shadow: var(--shadow-purple), 0 6px 20px rgba(181,123,238,0.35);
+}
+
+.btn-purple:hover {
+  box-shadow: 0 6px 0px var(--purple-deep), 0 10px 30px rgba(181,123,238,0.4);
+}
+
+/* Pulse */
+.btn-pulse { animation: btnBounce 2s ease-in-out infinite; }
+
+@keyframes btnBounce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%       { transform: translateY(-5px) scale(1.03); }
+}
+
+/* ── Roblox Card ─────────────────────────────────────────── */
+.roblox-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 3px solid var(--pink-light);
+  box-shadow: var(--shadow-card);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.roblox-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+  background: linear-gradient(to right, var(--pink), var(--purple), var(--blue), var(--mint));
+}
+
+/* ── Pixel Badge ─────────────────────────────────────────── */
+.pixel-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  padding: 0.3rem 0.9rem;
+  border-radius: var(--radius-pill);
+  background: var(--pink-pale);
+  color: var(--pink-deep);
+  border: 2px solid var(--pink-light);
+}
+
+.pixel-badge.purple {
+  background: var(--purple-pale);
+  color: var(--purple-deep);
+  border-color: var(--purple-light);
+}
+
+/* ── Section Title ───────────────────────────────────────── */
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  color: var(--text-dark);
+  text-align: center;
+  line-height: 1.2;
+}
+
+.section-title .highlight {
+  color: var(--pink);
+  -webkit-text-stroke: 2px var(--pink-deep);
+  text-shadow: var(--shadow-pink);
+}
+
+.section-title .highlight-purple {
+  color: var(--purple);
+  -webkit-text-stroke: 2px var(--purple-deep);
+  text-shadow: var(--shadow-purple);
+}
+
+.section-script {
+  font-family: var(--font-script);
+  font-size: clamp(1.3rem, 4vw, 2rem);
+  color: var(--pink);
+  text-align: center;
+}
+
+/* ── Fade In ─────────────────────────────────────────────── */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px) scale(0.97);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+.fade-in.visible { opacity: 1; transform: translateY(0) scale(1); }
+.fade-in-delay-1 { transition-delay: 0.15s; }
+.fade-in-delay-2 { transition-delay: 0.3s; }
+.fade-in-delay-3 { transition-delay: 0.45s; }
+.fade-in-delay-4 { transition-delay: 0.6s; }
+.fade-in-delay-5 { transition-delay: 0.75s; }
+
+/* ── Page Transition ─────────────────────────────────────── */
+.page-transition {
+  position: fixed; inset: 0;
+  background: var(--bg-main);
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+.page-transition.active { opacity: 1; pointer-events: all; }
+
+/* ── Wobble Emoji ────────────────────────────────────────── */
+.wobble { display: inline-block; animation: wobble 2.5s ease-in-out infinite; }
+@keyframes wobble {
+  0%, 100% { transform: rotate(-8deg) scale(1); }
+  50%       { transform: rotate(8deg) scale(1.15); }
+}
+
+/* ── Bounce Emoji ────────────────────────────────────────── */
+.bounce { display: inline-block; animation: bounce 1.4s ease-in-out infinite; }
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
+}
+
+/* ── Mobile ──────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .nav-links a { font-size: 0.72rem; padding: 0.3rem 0.7rem; }
+  .btn-roblox  { font-size: 0.9rem; padding: 0.8rem 2rem; }
+  .roblox-card { padding: 1.5rem; }
+}

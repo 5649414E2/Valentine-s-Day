@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ✏️ EDIT: Browser tab title -->
+  <title>Happy Valentine's Day! 💖</title>
+
+  <link rel="stylesheet" href="style.css" />
+  <style>
+
+    /* ── Hero ──────────────────────────────────────────────── */
+    .hero {
+      min-height: calc(100vh - var(--nav-height));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 3rem 1.5rem 4rem;
+      position: relative;
+    }
+
+    /* Big bubbly gradient background blob */
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 10%; left: 50%;
+      transform: translateX(-50%);
+      width: 90vw; height: 70vh;
+      background: radial-gradient(ellipse at 40% 40%,
+        rgba(255,110,180,0.18) 0%,
+        rgba(181,123,238,0.14) 40%,
+        rgba(110,198,255,0.10) 70%,
+        transparent 100%);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: blobPulse 5s ease-in-out infinite alternate;
+    }
+
+    @keyframes blobPulse {
+      from { transform: translateX(-50%) scale(1)   rotate(-2deg); opacity: 0.8; }
+      to   { transform: translateX(-50%) scale(1.06) rotate(2deg);  opacity: 1.0; }
+    }
+
+    /* ── Top badge ─────────────────────────────────────────── */
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      color: var(--purple-deep);
+      background: var(--purple-pale);
+      border: 2.5px solid var(--purple-light);
+      padding: 0.4rem 1.2rem;
+      border-radius: var(--radius-pill);
+      margin-bottom: 2rem;
+      animation: popIn 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.2s both;
+      box-shadow: 0 2px 10px rgba(181,123,238,0.2);
+    }
+
+    @keyframes popIn {
+      from { transform: scale(0) rotate(-10deg); opacity: 0; }
+      to   { transform: scale(1) rotate(0deg);   opacity: 1; }
+    }
+
+    /* ── Main title ────────────────────────────────────────── */
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 10vw, 6.5rem);
+      line-height: 1.1;
+      color: var(--text-dark);
+      animation: popIn 0.9s cubic-bezier(0.34,1.56,0.64,1) 0.4s both;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-title .line1 {
+      display: block;
+      color: var(--pink);
+      -webkit-text-stroke: 2.5px var(--pink-deep);
+      text-shadow: 4px 4px 0px var(--pink-deep);
+    }
+
+    .hero-title .line2 {
+      display: block;
+      color: var(--purple);
+      -webkit-text-stroke: 2.5px var(--purple-deep);
+      text-shadow: 4px 4px 0px var(--purple-deep);
+    }
+
+    /* ── Script sub-title ──────────────────────────────────── */
+    .hero-script {
+      font-family: var(--font-script);
+      font-size: clamp(1.3rem, 4vw, 2.2rem);
+      color: var(--text-mid);
+      margin: 1rem 0 0.5rem;
+      animation: popIn 0.9s cubic-bezier(0.34,1.56,0.64,1) 0.6s both;
+    }
+
+    /* ── Emoji row ─────────────────────────────────────────── */
+    .hero-emojis {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: 1.2rem 0 2rem;
+      animation: popIn 0.9s cubic-bezier(0.34,1.56,0.64,1) 0.8s both;
+    }
+
+    .hero-emojis span { display: inline-block; }
+    .hero-emojis span:nth-child(1) { animation: bounce 1.3s ease-in-out 0s infinite; }
+    .hero-emojis span:nth-child(2) { animation: bounce 1.3s ease-in-out 0.15s infinite; }
+    .hero-emojis span:nth-child(3) { animation: bounce 1.3s ease-in-out 0.3s infinite; }
+    .hero-emojis span:nth-child(4) { animation: bounce 1.3s ease-in-out 0.45s infinite; }
+    .hero-emojis span:nth-child(5) { animation: bounce 1.3s ease-in-out 0.6s infinite; }
+
+    /* ── Subtitle text ─────────────────────────────────────── */
+    .hero-sub {
+      font-family: var(--font-body);
+      font-size: clamp(1rem, 2.5vw, 1.15rem);
+      font-weight: 600;
+      color: var(--text-mid);
+      max-width: 480px;
+      margin: 0 auto 2.5rem;
+      animation: popIn 0.9s cubic-bezier(0.34,1.56,0.64,1) 1.0s both;
+    }
+
+    /* ── CTA ───────────────────────────────────────────────── */
+    .hero-cta {
+      animation: popIn 0.9s cubic-bezier(0.34,1.56,0.64,1) 1.2s both;
+    }
+
+    /* ── Feature Cards Below Hero ──────────────────────────── */
+    .features {
+      padding: 3rem 1.5rem 5rem;
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .features-title {
+      text-align: center;
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      color: var(--text-dark);
+      margin-bottom: 2rem;
+    }
+
+    .features-title span { color: var(--purple); }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .feature-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      border: 3px solid var(--pink-light);
+      box-shadow: 0 6px 0 var(--pink-light), var(--shadow-card);
+      text-decoration: none;
+      transition: var(--trans);
+      display: block;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(to right, var(--pink), var(--purple), var(--blue));
+    }
+
+    .feature-card:hover {
+      transform: translateY(-6px) rotate(-1deg);
+      box-shadow: 0 12px 0 var(--pink-light), 0 20px 40px rgba(255,110,180,0.2);
+      border-color: var(--pink);
+    }
+
+    .feature-card:nth-child(2) { border-color: var(--purple-light); box-shadow: 0 6px 0 var(--purple-light), var(--shadow-card); }
+    .feature-card:nth-child(2):hover { box-shadow: 0 12px 0 var(--purple-light), 0 20px 40px rgba(181,123,238,0.2); border-color: var(--purple); transform: translateY(-6px) rotate(1deg); }
+
+    .feature-card:nth-child(3) { border-color: var(--blue-light); box-shadow: 0 6px 0 var(--blue-light), var(--shadow-card); }
+    .feature-card:nth-child(3):hover { box-shadow: 0 12px 0 var(--blue-light), 0 20px 40px rgba(110,198,255,0.2); border-color: var(--blue); transform: translateY(-6px) rotate(-1deg); }
+
+    .feature-icon {
+      font-size: 3rem;
+      display: block;
+      margin-bottom: 0.8rem;
+    }
+
+    .feature-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      color: var(--text-dark);
+      margin-bottom: 0.4rem;
+    }
+
+    .feature-desc {
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* ── Roblox-style decorative tiles in BG ───────────────── */
+    .deco-tile {
+      position: fixed;
+      border-radius: var(--radius-md);
+      opacity: 0.07;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .deco-tile-1 {
+      width: 180px; height: 180px;
+      background: var(--pink);
+      top: 10%; right: -60px;
+      transform: rotate(20deg);
+      animation: tileFloat 6s ease-in-out infinite;
+    }
+
+    .deco-tile-2 {
+      width: 120px; height: 120px;
+      background: var(--purple);
+      bottom: 20%; left: -40px;
+      transform: rotate(-15deg);
+      animation: tileFloat 8s ease-in-out 1s infinite reverse;
+    }
+
+    .deco-tile-3 {
+      width: 90px; height: 90px;
+      background: var(--blue);
+      top: 40%; right: 5%;
+      transform: rotate(10deg);
+      animation: tileFloat 7s ease-in-out 0.5s infinite;
+    }
+
+    @keyframes tileFloat {
+      0%, 100% { transform: rotate(20deg) translateY(0); }
+      50%       { transform: rotate(20deg) translateY(-20px); }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="sparkle-canvas"></canvas>
+  <div class="hearts-container"></div>
+  <div class="page-transition active"></div>
+
+  <!-- Decorative tiles -->
+  <div class="deco-tile deco-tile-1"></div>
+  <div class="deco-tile deco-tile-2"></div>
+  <div class="deco-tile deco-tile-3"></div>
+
+  <nav class="roblox-nav">
+    <ul class="nav-links">
+      <li><a href="index.html">🏠 Home</a></li>
+      <li><span class="nav-divider">·</span></li>
+      <li><a href="reasons.html">💌 Reasons</a></li>
+      <li><span class="nav-divider">·</span></li>
+      <li><a href="surprise.html">🎁 Surprise</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-wrapper">
+
+    <!-- HERO -->
+    <section class="hero">
+
+      <!-- ✏️ EDIT: Top badge text -->
+      <div class="hero-badge">
+        ✦ A Special Message For You ✦
+      </div>
+
+      <!-- ✏️ EDIT: Main title lines -->
+      <h1 class="hero-title">
+        <span class="line1">Happy</span>
+        <span class="line2">Valentine's!</span>
+      </h1>
+
+      <!-- ✏️ EDIT: Script subtitle -->
+      <p class="hero-script">you are literally the best 🌸</p>
+
+      <div class="hero-emojis">
+        <span>💖</span><span>✨</span><span>🌸</span><span>💜</span><span>⭐</span>
+      </div>
+
+      <!-- ✏️ EDIT: Short welcome message -->
+      <p class="hero-sub">
+        I made this little website just for you.<br>
+        Go explore — there's something cute waiting! 👇
+      </p>
+
+      <div class="hero-cta">
+        <a href="reasons.html" class="btn-roblox btn-pulse">
+          Let's Go! ✨
+        </a>
+      </div>
+    </section>
+
+    <!-- FEATURE CARDS -->
+    <section class="features">
+      <h2 class="features-title fade-in">
+        What's inside? <span>✦</span>
+      </h2>
+
+      <div class="features-grid">
+        <a href="reasons.html" class="feature-card fade-in fade-in-delay-1">
+          <span class="feature-icon">💌</span>
+          <p class="feature-title">Reasons I Like You</p>
+          <p class="feature-desc">A whole list, just for you</p>
+        </a>
+        <a href="reasons.html" class="feature-card fade-in fade-in-delay-2">
+          <span class="feature-icon">🌸</span>
+          <p class="feature-title">Nice Things</p>
+          <p class="feature-desc">Warm & sweet messages</p>
+        </a>
+        <a href="surprise.html" class="feature-card fade-in fade-in-delay-3">
+          <span class="feature-icon">🎁</span>
+          <p class="feature-title">A Surprise</p>
+          <p class="feature-desc">Click to find out... 👀</p>
+        </a>
+      </div>
+    </section>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
