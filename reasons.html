@@ -323,5 +323,19 @@
   </div>
 
   <script src="script.js"></script>
+  <!-- 🎵 Background Music — paste just before </body> on every page -->
+<audio id="bg-music" src="music.mp3" loop preload="auto"></audio>
+<script>
+  const audio = document.getElementById('bg-music');
+  const savedTime = localStorage.getItem('musicTime');
+  if (savedTime) audio.currentTime = parseFloat(savedTime);
+  setInterval(() => {
+    if (!audio.paused) localStorage.setItem('musicTime', audio.currentTime);
+  }, 1000);
+  document.addEventListener('click', function play() {
+    audio.play();
+    document.removeEventListener('click', play);
+  }, { once: true });
+</script>
 </body>
 </html>
